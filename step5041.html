@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>症状の経過</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 140100: 症状の経過 -->
+<h1 id="行140100"></h1>
+
+<!-- 症状名（動的） -->
+<h2 id="症状名表示"></h2>
+<!-- 140200: この症状はいつ頃からありますか -->
+<p id="行140200" style="margin-left: 1em;"></p>
+
+<p>　</p>
+
+<form>
+
+<label>
+<!-- 140300: 数時間前から -->
+<input type="radio" name="発症時期" value="140300" checked>
+<span id="行140300"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 140400: 24時間以内 -->
+<input type="radio" name="発症時期" value="140400">
+<span id="行140400"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 140500: 1日～数日前から -->
+<input type="radio" name="発症時期" value="140500">
+<span id="行140500"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 140600: 1週間くらい前から -->
+<input type="radio" name="発症時期" value="140600">
+<span id="行140600"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 140700: 数週間前から -->
+<input type="radio" name="発症時期" value="140700">
+<span id="行140700"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 140800: 1か月くらい前から -->
+<input type="radio" name="発症時期" value="140800">
+<span id="行140800"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 140900: 数か月前から -->
+<input type="radio" name="発症時期" value="140900">
+<span id="行140900"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 141000: 半年以上前から -->
+<input type="radio" name="発症時期" value="141000">
+<span id="行141000"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 141100: わからない -->
+<input type="radio" name="発症時期" value="141100">
+<span id="行141100"></span>
+</label>
+
+<br><br>
+
+<!-- 141200: 次へ -->
+<button type="button" id="行141200" onclick="次へ()"></button>
+
+</form>
+
+<script src="dict.js"></script>
+
+<script>
+function 画面初期化(){
+  [140100, 140200, 140300, 140400, 140500, 140600, 140700, 140800, 140900, 141000, 141100, 141200].forEach(function(番号){
+    const 要素 = document.getElementById("行" + 番号);
+    if(要素) 要素.textContent = 文字列取得(番号);
+  });
+
+  // 最重要主訴の行番号から症状名を取得して表示
+  const 最重要主訴行番号 = localStorage.getItem("最重要主訴");
+  if(最重要主訴行番号){
+    document.getElementById("症状名表示").textContent = 文字列取得(Number(最重要主訴行番号));
+  }
+}
+
+function 次へ(){
+  const 発症時期 = document.querySelector('input[name="発症時期"]:checked').value;
+  localStorage.setItem("発症時期", 発症時期);
+  location.href = "step509.html";
+}
+
+画面初期化();
+</script>
+
+</body>
+</html>

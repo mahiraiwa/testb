@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>症状の経過</title>
+</head>
+
+<body>
+
+<h1>症状の経過</h1>
+
+<p id="表示文"></p>
+
+<form>
+
+<label>
+<input type="radio" name="発症時期" value="数時間前から" checked>
+数時間前から
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="24時間以内">
+24時間以内
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="1日～数日前から">
+1日～数日前から
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="1週間くらい前から">
+1週間くらい前から
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="数週間前から">
+数週間前から
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="1か月くらい前から">
+1か月くらい前から
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="数か月前から">
+数か月前から
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="半年以上前から">
+半年以上前から
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="わからない">
+わからない
+</label>
+
+<br><br>
+
+<button type="button" onclick="次へ()">
+次へ
+</button>
+
+</form>
+
+<script>
+
+const 主訴 =
+localStorage.getItem("主訴");
+
+document.getElementById("表示文").textContent =
+主訴 + "は、いつ頃からありますか";
+
+function 次へ(){
+
+const 発症時期 =
+document.querySelector(
+'input[name="発症時期"]:checked'
+).value;
+
+localStorage.setItem(
+"発症時期",
+発症時期
+);
+
+location.href = "step9_b.html";
+
+}
+
+</script>
+
+</body>
+</html>

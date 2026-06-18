@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>主訴選択</title>
+</head>
+
+<body>
+
+<h1>主訴確認</h1>
+
+<p>今回もっとも困っている症状は何ですか</p>
+
+<form>
+
+<label>
+<input type="radio" name="chief" value="痛み" checked>
+痛み（頭痛、胸痛、腹痛、腰痛、関節痛、その他のからだの場所の痛み）
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="chief" value="発熱">
+発熱
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="chief" value="浮腫">
+浮腫（顔、四肢などのむくみ）
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="chief" value="皮膚の異常">
+皮膚の異常
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="chief" value="めまい">
+めまい（視野が動いて目が回る、足がふらふらする、体がフアフアする、気を失いそうになる）
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="chief" value="気を失った、気が遠くなった">
+気を失った、気が遠くなった
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="chief" value="息が苦しい">
+息が苦しい
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="chief" value="咳や痰が出る">
+咳や痰が出る
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="chief" value="吐き気や嘔吐がある">
+吐き気や嘔吐がある
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="chief" value="手足がしびれる">
+手足がしびれる
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="chief" value="その他">
+その他
+</label>
+
+<br><br>
+
+<button type="button" onclick="主訴保存()">
+次へ
+</button>
+
+</form>
+
+<script>
+
+function 主訴保存(){
+
+const 主訴 =
+document.querySelector(
+'input[name="chief"]:checked'
+).value;
+
+localStorage.setItem(
+"主訴",
+主訴
+);
+
+location.href = "step3.html";
+
+}
+
+</script>
+
+</body>
+</html>

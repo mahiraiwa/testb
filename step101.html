@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>問診内容確認</title>
+</head>
+
+<body>
+
+<h1>問診内容確認</h1>
+
+<p>入力内容を確認してください</p>
+
+<div id="確認内容"></div>
+
+<br><br>
+
+<button type="button" onclick="次へ()">
+次へ
+</button>
+
+<button type="button" onclick="やり直し()">
+やり直し
+</button>
+
+<script>
+
+const 確認内容 =
+document.getElementById("確認内容");
+
+for (
+let 番号 = 0;
+番号 < localStorage.length;
+番号++
+) {
+
+const 項目名 =
+localStorage.key(番号);
+
+const 内容 =
+localStorage.getItem(項目名);
+
+const 行 =
+document.createElement("p");
+
+行.textContent =
+項目名 + " ： " + 内容;
+
+確認内容.appendChild(行);
+
+}
+
+function 次へ() {
+
+location.href = "step102.html";
+
+}
+
+function やり直し() {
+
+localStorage.clear();
+  
+location.href = "step2_c.html";
+
+}
+
+</script>
+
+</body>
+</html>

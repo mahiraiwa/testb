@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>その他の健康情報</title>
+</head>
+
+<body>
+
+<h1>その他の健康情報</h1>
+
+<p id="発症時期表示"></p>
+
+<form>
+
+<p>おしっこが出にくいですか</p>
+
+<label>
+<input type="radio" name="排尿しにくい" value="ある">
+ある
+</label><br>
+
+<label>
+<input type="radio" name="排尿しにくい" value="ない" checked>
+ない
+</label>
+
+<br><br>
+
+<p>おしっこが出るとき痛いですか</p>
+
+<label>
+<input type="radio" name="排尿時痛" value="ある">
+ある
+</label><br>
+
+<label>
+<input type="radio" name="排尿時痛" value="ない" checked>
+ない
+</label>
+
+<br><br>
+
+<p>最近、自分のいるところがどこなのかわからなくなったことはありますか</p>
+
+<label>
+<input type="radio" name="場所がわからなくなった" value="ある">
+ある
+</label><br>
+
+<label>
+<input type="radio" name="場所がわからなくなった" value="ない" checked>
+ない
+</label>
+
+<br><br>
+
+<p>最近、気を失ったことはありますか</p>
+
+<label>
+<input type="radio" name="失神" value="ある">
+ある
+</label><br>
+
+<label>
+<input type="radio" name="失神" value="ない" checked>
+ない
+</label>
+
+<br><br>
+
+<hr>
+
+<p>二年以内に健康診断を受けたことはありますか</p>
+
+<label>
+<input type="radio" name="健康診断受診" value="ある">
+ある
+</label><br>
+
+<label>
+<input type="radio" name="健康診断受診" value="ない" checked>
+ない
+</label>
+
+<br><br>
+
+<p>ある場合は、その内容を後で医師が確認します。</p>
+
+<br>
+
+<p>今までに大きな病気をしたことがありますか</p>
+
+<label>
+<input type="radio" name="大きな病気の既往" value="ある">
+ある
+</label><br>
+
+<label>
+<input type="radio" name="大きな病気の既往" value="ない" checked>
+ない
+</label>
+
+<br><br>
+
+<p>ある場合は、その内容を後で医師が確認します。</p>
+
+<br><br>
+
+<button type="button" onclick="終了()">
+終了
+</button>
+
+</form>
+
+<script>
+
+const 痛み開始時期 =
+localStorage.getItem("痛み開始時期");
+
+if (痛み開始時期) {
+
+document.getElementById("発症時期表示").textContent =
+"あなたは「" +
+痛み開始時期 +
+"」から痛みがあると回答しました。";
+
+}
+
+function 終了() {
+
+localStorage.setItem(
+"排尿しにくい",
+document.querySelector(
+'input[name="排尿しにくい"]:checked'
+).value
+);
+
+localStorage.setItem(
+"排尿時痛",
+document.querySelector(
+'input[name="排尿時痛"]:checked'
+).value
+);
+
+localStorage.setItem(
+"場所がわからなくなった",
+document.querySelector(
+'input[name="場所がわからなくなった"]:checked'
+).value
+);
+
+localStorage.setItem(
+"失神",
+document.querySelector(
+'input[name="失神"]:checked'
+).value
+);
+
+localStorage.setItem(
+"健康診断受診",
+document.querySelector(
+'input[name="健康診断受診"]:checked'
+).value
+);
+
+localStorage.setItem(
+"大きな病気の既往",
+document.querySelector(
+'input[name="大きな病気の既往"]:checked'
+).value
+);
+
+location.href = "step101.html";
+
+}
+
+</script>
+
+</body>
+</html>

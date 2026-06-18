@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>めまいの経過</title>
+</head>
+
+<body>
+
+<h1>めまいの経過</h1>
+
+<p>めまいは、いつ頃からありますか</p>
+
+<form>
+
+<label>
+<input type="radio" name="発症時期" value="数時間前から" checked>
+数時間前から
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="24時間以内">
+24時間以内
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="1日～数日前から">
+1日～数日前から
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="1週間くらい前から">
+1週間くらい前から
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="数週間前から">
+数週間前から
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="1か月くらい前から">
+1か月くらい前から
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="数か月前から">
+数か月前から
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="半年以上前から">
+半年以上前から
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="発症時期" value="わからない">
+わからない
+</label>
+
+<br><br>
+
+<button type="button" onclick="次へ()">
+次へ
+</button>
+
+</form>
+
+<script>
+
+function 次へ(){
+
+const 発症時期 =
+document.querySelector(
+'input[name="発症時期"]:checked'
+).value;
+
+localStorage.setItem(
+"発症時期",
+発症時期
+);
+
+location.href = "step5_2.html";
+
+}
+
+</script>
+
+</body>
+</html>

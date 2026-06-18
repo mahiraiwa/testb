@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>食欲と食事量</title>
+</head>
+
+<body>
+
+<h1>その他の確認事項</h1>
+
+<p>主な症状以外についてお聞きします</p>
+
+<form>
+
+<p>食欲はありますか</p>
+
+<label>
+<input type="radio" name="食欲" value="変わりない" checked>
+変わりない
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="食欲" value="落ちた">
+落ちた
+</label>
+
+<br><br>
+
+<hr>
+
+<p>実際の食事量はどうですか</p>
+
+<label>
+<input type="radio" name="食事量" value="変わらない" checked>
+変わらない
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="食事量" value="少しだけ減った">
+少しだけ減った
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="食事量" value="半分くらい">
+半分くらい
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="食事量" value="ほとんど食べられない">
+ほとんど食べられない
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="食事量" value="水分のみ">
+水分のみ
+</label>
+
+<br><br>
+
+<button type="button" onclick="次へ()">
+次へ
+</button>
+
+</form>
+
+<script>
+
+const 痛み開始時期 =
+localStorage.getItem("痛み開始時期");
+
+if(痛み開始時期){
+
+document.getElementById("発症時期表示").textContent =
+"あなたは「" +
+痛み開始時期 +
+"」から痛みがあると回答しました。";
+
+}
+
+function 次へ(){
+
+const 食欲 =
+document.querySelector(
+'input[name="食欲"]:checked'
+);
+
+const 食事量 =
+document.querySelector(
+'input[name="食事量"]:checked'
+);
+
+if(!食欲 || !食事量){
+
+return;
+
+}
+
+localStorage.setItem(
+"食欲",
+食欲.value
+);
+
+localStorage.setItem(
+"食事量",
+食事量.value
+);
+
+location.href = "step10_b.html";
+
+}
+
+</script>
+
+</body>
+</html>
+

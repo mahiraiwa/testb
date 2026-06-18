@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>痛みと姿勢・動作</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 80100: 痛みと姿勢・動作 -->
+<h1 id="行80100"></h1>
+
+<!-- 80200: 痛みがひどくなる姿勢や動作はありますか -->
+<p id="行80200" style="margin-left: 1em;"></p>
+
+<!-- <p>　</p> -->
+
+<form>
+
+<label>
+<!-- 80300: はい -->
+<input type="radio" name="悪化する姿勢や動作" value="80300" checked>
+<span id="行80300"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 80400: いいえ -->
+<input type="radio" name="悪化する姿勢や動作" value="80400">
+<span id="行80400"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 80500: わからない -->
+<input type="radio" name="悪化する姿勢や動作" value="80500">
+<span id="行80500"></span>
+</label>
+
+<br><br>
+
+<!-- 80600: 逆に、痛みが楽になる姿勢や動作はありますか -->
+<p id="行80600" style="margin-left: 1em;"></p>
+
+<!-- <p>　</p> -->
+
+<label>
+<!-- 80700: はい -->
+<input type="radio" name="楽になる姿勢や動作" value="80700" checked>
+<span id="行80700"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 80800: いいえ -->
+<input type="radio" name="楽になる姿勢や動作" value="80800">
+<span id="行80800"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 80900: わからない -->
+<input type="radio" name="楽になる姿勢や動作" value="80900">
+<span id="行80900"></span>
+</label>
+
+<br><br>
+
+<!-- 81000: 「はい」を選んだ場合は、あとで医師に詳しく伝えてください。 -->
+<p id="行81000"></p>
+
+<br>
+
+<!-- 81100: 次へ -->
+<button type="button" id="行81100" onclick="次へ()"></button>
+
+</form>
+
+<script src="dict.js"></script>
+
+<script>
+function 画面初期化(){
+  [80100, 80200, 80300, 80400, 80500, 80600, 80700, 80800, 80900, 81000, 81100].forEach(function(番号){
+    const 要素 = document.getElementById("行" + 番号);
+    if(要素) 要素.textContent = 文字列取得(番号);
+  });
+}
+
+function 次へ(){
+  const 悪化する姿勢や動作 = document.querySelector('input[name="悪化する姿勢や動作"]:checked').value;
+  const 楽になる姿勢や動作 = document.querySelector('input[name="楽になる姿勢や動作"]:checked').value;
+  localStorage.setItem("悪化する姿勢や動作", 悪化する姿勢や動作);
+  localStorage.setItem("楽になる姿勢や動作", 楽になる姿勢や動作);
+  location.href = "step508.html";
+}
+
+画面初期化();
+</script>
+
+</body>
+</html>

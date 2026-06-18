@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>めまいの経過</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 150100: めまいの経過 -->
+<h1 id="行150100"></h1>
+
+<!-- 150200: めまいは、いつ頃からありますか -->
+<p id="行150200" style="margin-left: 1em;"></p>
+
+<p>　</p>
+
+<form>
+
+<label>
+<!-- 150300: 数時間前から -->
+<input type="radio" name="発症時期" value="150300" checked>
+<span id="行150300"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 150400: 24時間以内 -->
+<input type="radio" name="発症時期" value="150400">
+<span id="行150400"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 150500: 1日～数日前から -->
+<input type="radio" name="発症時期" value="150500">
+<span id="行150500"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 150600: 1週間くらい前から -->
+<input type="radio" name="発症時期" value="150600">
+<span id="行150600"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 150700: 数週間前から -->
+<input type="radio" name="発症時期" value="150700">
+<span id="行150700"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 150800: 1か月くらい前から -->
+<input type="radio" name="発症時期" value="150800">
+<span id="行150800"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 150900: 数か月前から -->
+<input type="radio" name="発症時期" value="150900">
+<span id="行150900"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 151000: 半年以上前から -->
+<input type="radio" name="発症時期" value="151000">
+<span id="行151000"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 151100: わからない -->
+<input type="radio" name="発症時期" value="151100">
+<span id="行151100"></span>
+</label>
+
+<br><br>
+
+<!-- 151200: 次へ -->
+<button type="button" id="行151200" onclick="次へ()"></button>
+
+</form>
+
+<script src="dict.js"></script>
+
+<script>
+function 画面初期化(){
+  [150100, 150200, 150300, 150400, 150500, 150600, 150700, 150800, 150900, 151000, 151100, 151200].forEach(function(番号){
+    const 要素 = document.getElementById("行" + 番号);
+    if(要素) 要素.textContent = 文字列取得(番号);
+  });
+}
+
+function 次へ(){
+  const 発症時期 = document.querySelector('input[name="発症時期"]:checked').value;
+  localStorage.setItem("発症時期", 発症時期);
+  location.href = "step5052.html";
+}
+
+画面初期化();
+</script>
+
+</body>
+</html>

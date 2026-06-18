@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>痛みの部位</title>
+</head>
+
+<body>
+
+<h1>痛みの部位</h1>
+
+<p>どこが痛いのですか（複数選択可）</p>
+
+<form>
+
+<label>
+<input type="checkbox" name="痛み部位" value="頭">
+頭
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="痛み部位" value="のど">
+のど
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="痛み部位" value="首">
+首
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="痛み部位" value="肩">
+肩
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="痛み部位" value="胸">
+胸（前胸部、乳房）
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="痛み部位" value="腹部">
+腹部
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="痛み部位" value="背部">
+背部
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="痛み部位" value="腰">
+腰
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="痛み部位" value="上肢">
+上肢（指、手首、肘）
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="痛み部位" value="下肢">
+下肢（足の指、足首、膝、足の付け根）
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="痛み部位" value="その他">
+その他
+</label>
+
+<br><br>
+
+<button type="button" onclick="次へ()">
+次へ
+</button>
+
+</form>
+
+<script>
+
+function 次へ() {
+
+const 選択部位 =
+document.querySelectorAll(
+'input[name="痛み部位"]:checked'
+);
+
+if (選択部位.length === 0) {
+
+alert("痛い部位を選択してください");
+return;
+
+}
+
+if (選択部位.length === 1) {
+
+location.href = "step4.html";
+
+} else {
+
+location.href = "step3_1.html";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

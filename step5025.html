@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>最もつらい症状</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 22100: 最もつらい症状 -->
+<h1 id="行22100"></h1>
+
+<!-- 22200: 複数の症状があります。 -->
+<!-- 22300: この中で最もつらい症状を選んでください。 -->
+<p>
+<span id="行22200"></span><br>
+<span id="行22300"></span>
+</p>
+
+<form id="chiefForm">
+
+<div id="症状一覧"></div>
+
+<br>
+
+<!-- 22400: 次へ -->
+<button type="button" id="行22400" onclick="次へ()"></button>
+
+</form>
+
+<script src="dict.js"></script>
+
+<script>
+function 画面初期化(){
+  // 固定テキスト
+  [22100, 22200, 22300, 22400].forEach(function(番号){
+    const 要素 = document.getElementById("行" + 番号);
+    if(要素) 要素.textContent = 文字列取得(番号);
+  });
+
+  // localStorageから行番号一覧を取得し、ラジオボタンを動的生成
+  const 主訴一覧 = JSON.parse(localStorage.getItem("主訴一覧"));
+  const 症状一覧 = document.getElementById("症状一覧");
+
+  主訴一覧.forEach(function(行番号){
+    const label = document.createElement("label");
+    const テキスト = 文字列取得(Number(行番号));
+    label.innerHTML =
+      '<input type="radio" name="最重要主訴" value="' + 行番号 + '"> '
+      + テキスト;
+    症状一覧.appendChild(label);
+    症状一覧.appendChild(document.createElement("br"));
+    症状一覧.appendChild(document.createElement("br"));
+  });
+}
+
+function 次へ(){
+  const 選択 = document.querySelector('input[name="最重要主訴"]:checked');
+  if(!選択){ return; }
+
+  localStorage.setItem("最重要主訴", 選択.value); // 行番号を保存
+
+  if(選択.value === "20300"){       // 痛み
+    location.href = "step503.html";
+  } else if(選択.value === "20700"){ // めまい
+    location.href = "step5042.html";
+  } else {
+    location.href = "step5041.html";
+  }
+}
+
+画面初期化();
+</script>
+
+</body>
+</html>

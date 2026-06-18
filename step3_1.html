@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>痛みの優先順位</title>
+</head>
+
+<body>
+
+<h1 id="title"></h1>
+
+<p id="message1"></p>
+
+<div id="selectedSites"></div>
+
+<br>
+
+<p id="message2"></p>
+
+<select id="primaryPain"></select>
+
+<br><br>
+
+<p id="message3"></p>
+
+<select id="secondaryPain"></select>
+
+<br><br>
+
+<p id="message4"></p>
+
+<br>
+
+<button type="button" onclick="goNext()">
+次へ
+</button>
+
+<script>
+
+/* =====================================
+   現在言語
+   将来 index_b で保存
+   ===================================== */
+
+const currentLanguage =
+localStorage.getItem("LANG")
+|| "ja";
+
+/* =====================================
+   辞書
+   ===================================== */
+
+const BODY_PARTS = {
+
+HEAD:{
+ja:"頭",
+en:"Head",
+fa:"سر"
+},
+
+THROAT:{
+ja:"のど",
+en:"Throat",
+fa:"گلو"
+},
+
+NECK:{
+ja:"首",
+en:"Neck",
+fa:"گردن"
+},
+
+SHOULDER:{
+ja:"肩",
+en:"Shoulder",
+fa:"شانه"
+},
+
+CHEST:{
+ja:"胸（前胸部、乳房）",
+en:"Chest",
+fa:"سینه"
+},
+
+ABDOMEN:{
+ja:"腹部",
+en:"Abdomen",
+fa:"شکم"
+},
+
+BACK:{
+ja:"背部",
+en:"Back",
+fa:"پشت"
+},
+
+LOWBACK:{
+ja:"腰",
+en:"Low back",
+fa:"کمر"
+},
+
+UPPERLIMB:{
+ja:"上肢（指、手首、肘）",
+en:"Upper limb",
+fa:"اندام فوقانی"
+},
+
+LOWERLIMB:{
+ja:"下肢（足の指、足首、膝、足の付け根）",
+en:"Lower limb",
+fa:"اندام تحتانی"
+},
+
+OTHER:{
+ja:"その他",
+en:"Other",
+fa:"سایر"
+}
+
+};
+
+/* =====================================
+   文言辞書
+   ===================================== */
+
+const TEXT = {
+
+TITLE:{
+ja:"痛みの優先順位",
+en:"Pain Priority",
+fa:"اولویت درد"
+},
+
+MESSAGE1:{
+ja:"あなたが選択した痛みの部位です",
+en:"You selected the following painful areas",
+fa:"شما این نواحی دردناک را انتخاب کرده‌اید"
+},
+
+MESSAGE2:{
+ja:"この中で最も強い痛みはどこですか",
+en:"Which pain is the strongest?",
+fa:"کدام درد شدیدتر است؟"
+},
+
+MESSAGE3:{
+ja:"二番目に強い痛みはどこですか",
+en:"Which pain is the second strongest?",
+fa:"دومین درد شدید کدام است؟"
+},
+
+MESSAGE4:{
+ja:"次のページでは最も強い痛みについて確認します",
+en:"Next we will ask about the strongest pain",
+fa:"در صفحه بعد درباره شدیدترین درد سؤال می‌شود"
+}
+
+};
+
+function dualText(obj){
+
+if(currentLanguage==="ja"){
+return obj.ja;
+}
+
+return obj[currentLanguage]
++"<br>"
++"（"+obj.ja+"）";
+
+}
+
+/* =====================================
+   step3から取得
+   ===================================== */
+
+const selectedSites =
+JSON.parse(
+localStorage.getItem("PAIN_SITES")
+);
+
+/* =====================================
+   1か所だけなら不要
+   ===================================== */
+
+if(!selectedSites || selectedSites.length<2){
+
+location.href="step4.html";
+
+}
+
+/* =====================================
+   タイトル
+   ===================================== */
+
+document.getElementById("title").innerHTML =
+dualText(TEXT.TITLE);
+
+document.getElementById("message1").innerHTML =
+dualText(TEXT.MESSAGE1);
+
+document.getElementById("message2").innerHTML =
+dualText(TEXT.MESSAGE2);
+
+document.getElementById("message3").innerHTML =
+dualText(TEXT.MESSAGE3);
+
+document.getElementById("message4").innerHTML =
+dualText(TEXT.MESSAGE4);
+
+/* =====================================
+   選択済み部位表示
+   ===================================== */
+
+const selectedDiv =
+document.getElementById("selectedSites");
+
+selectedSites.forEach(code=>{
+
+const div =
+document.createElement("div");
+
+if(currentLanguage==="ja"){
+
+div.textContent =
+"・"+BODY_PARTS[code].ja;
+
+}else{
+
+div.innerHTML =
+"・"
++BODY_PARTS[code][currentLanguage]
++"（"
++BODY_PARTS[code].ja
++"）";
+
+}
+
+selectedDiv.appendChild(div);
+
+});
+
+/* =====================================
+   プルダウン
+   ===================================== */
+
+const primary =
+document.getElementById("primaryPain");
+
+selectedSites.forEach(code=>{
+
+const option =
+document.createElement("option");
+
+option.value = code;
+
+option.textContent =
+BODY_PARTS[code].ja;
+
+primary.appendChild(option);
+
+});
+
+const secondary =
+document.getElementById("secondaryPain");
+
+function updateSecondary(){
+
+secondary.innerHTML="";
+
+selectedSites.forEach(code=>{
+
+if(code!==primary.value){
+
+const option =
+document.createElement("option");
+
+option.value = code;
+
+option.textContent =
+BODY_PARTS[code].ja;
+
+secondary.appendChild(option);
+
+}
+
+});
+
+}
+
+primary.addEventListener(
+"change",
+updateSecondary
+);
+
+updateSecondary();
+
+/* =====================================
+   保存
+   ===================================== */
+
+function goNext(){
+
+localStorage.setItem(
+"PAIN_PRIMARY",
+primary.value
+);
+
+localStorage.setItem(
+"PAIN_SECONDARY",
+secondary.value
+);
+
+location.href="step4.html";
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<h1>こんにちは</h1>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>問診票</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+ 
+<h1>問診票</h1>
+
+<div style="float:right; margin-left:20px;">
+
+<img
+src="qr_index_c.png"
+width="200"
+height="200"
+alt="QRコード">
+
+</div>
+
+  
+<p>言語を選択してください</p>
+
+<form>
+
+<input type="radio" name="lang" checked>
+日本語
+<br><br>
+
+<input type="radio" name="lang">
+English（英語）
+<br><br>
+
+<input type="radio" name="lang">
+中文简体（中国語・簡体字）
+<br><br>
+
+<input type="radio" name="lang">
+繁體中文（中国語・繁体字）
+<br><br>
+
+<input type="radio" name="lang">
+বাংলা（ベンガル語）
+<br><br>
+
+<input type="radio" name="lang">
+اردو（ウルドゥー語）
+<br><br>
+
+<input type="radio" name="lang">
+فارسی（ペルシャ語）
+<br><br>
+
+<input type="radio" name="lang">
+Bahasa Indonesia（インドネシア語）
+<br><br>
+
+<input type="radio" name="lang">
+Tiếng Việt（ベトナム語）
+<br><br>
+
+<input type="radio" name="lang">
+မြန်မာဘာသာ（ミャンマー語）
+<br><br>
+
+<input type="radio" name="lang">
+नेपाली（ネパール語）
+<br><br>
+
+<input type="radio" name="lang">
+Tagalog（タガログ語）
+<br><br>
+
+<input type="radio" name="lang">
+தமிழ்（タミル語）
+<br><br>
+
+<input type="radio" name="lang">
+සිංහල（シンハラ語）
+<br><br>
+
+<!--
+<button type="button">次へ</button>
+-->
+
+<button type="button" onclick="開始()">
+次へ
+</button>
+
+</form>
+
+<script>
+
+function 開始(){
+
+localStorage.clear();
+
+location.href = "step2_d.html";
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>主訴選択</title>
+</head>
+
+<body>
+
+<h1>主訴確認</h1>
+
+<p>今回もっとも困っている症状は何ですか（複数選択可）</p>
+
+<form>
+
+<label>
+<input type="checkbox" name="主訴" value="痛み">
+痛み（頭痛、胸痛、腹痛、腰痛、関節痛、その他のからだの場所の痛み）
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="主訴" value="発熱">
+発熱
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="主訴" value="浮腫">
+浮腫（顔、四肢などのむくみ）
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="主訴" value="皮膚の異常">
+皮膚の異常
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="主訴" value="めまい">
+めまい（視野が動いて目が回る、足がふらふらする、体がフアフアする、気を失いそうになる）
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="主訴" value="気を失った、気が遠くなった">
+気を失った、気が遠くなった
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="主訴" value="息が苦しい">
+息が苦しい
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="主訴" value="咳や痰が出る">
+咳や痰が出る
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="主訴" value="吐き気や嘔吐、食欲不振がある">
+吐き気や嘔吐、食欲不振がある
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="主訴" value="手足がしびれる">
+手足がしびれる
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" name="主訴"
+value="ここに上げられている症状のリストにない、これら以外の症状">
+ここに上げられている症状のリストにない、これら以外の症状
+</label>
+
+<br><br>
+
+<button type="button" onclick="主訴保存()">
+次へ
+</button>
+
+</form>
+
+<script>
+
+function 主訴保存(){
+
+const 選択結果 = [];
+
+document
+.querySelectorAll('input[name="主訴"]:checked')
+.forEach(function(項目){
+
+選択結果.push(
+項目.value
+);
+
+});
+
+if(選択結果.length === 0){
+
+return;
+
+}
+
+localStorage.setItem(
+"主訴一覧",
+JSON.stringify(選択結果)
+);
+
+if(選択結果.length === 1){
+
+localStorage.setItem(
+"最重要主訴",
+選択結果[0]
+);
+
+if(選択結果[0] === "痛み"){
+
+location.href = "step3_c.html";
+
+}
+else if(選択結果[0] === "めまい"){
+
+location.href = "step4_2.html";
+
+}
+else{
+
+location.href = "step4_11.html";
+
+}
+
+}
+else{
+
+location.href = "step2_5.html";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

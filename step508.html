@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>既往の痛みの有無</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<style>
+body {
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background-image: url("logob.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+}
+</style>
+<!-- 90100: 既往の痛みの有無 -->
+<h1 id="行90100"></h1>
+<!-- 90200: 今回の痛みについてお聞きします -->
+<p id="行90200" style="margin-left: 1em;"></p>
+<!-- 90300: 痛みの強さは違っていても、以前に似たような痛みがありましたか -->
+<p id="行90300" style="margin-left: 1em;"></p>
+<!-- 90400: それとも人生で初めての痛みですか -->
+<p id="行90400" style="margin-left: 1em;"></p>
+  <form>
+<p>　</p>
+    <label>
+<!-- 90500: 人生で初めての痛み -->
+<input type="radio" name="過去に似た痛み" value="90500" checked>
+<span id="行90500"></span>
+</label>
+<br><br>
+<label>
+<!-- 90600: 前にも似たような痛みがあった -->
+<input type="radio" name="過去に似た痛み" value="90600">
+<span id="行90600"></span>
+</label>
+<br><br>
+<label>
+<!-- 90700: わからない -->
+<input type="radio" name="過去に似た痛み" value="90700">
+<span id="行90700"></span>
+</label>
+<br><br>
+<!-- 90800: 次へ -->
+<button type="button" id="行90800" onclick="次へ()"></button>
+</form>
+<script src="dict.js"></script>
+<script>
+function 画面初期化(){
+  [90100, 90200, 90300, 90400, 90500, 90600, 90700, 90800].forEach(function(番号){
+    const 要素 = document.getElementById("行" + 番号);
+    if(要素) 要素.textContent = 文字列取得(番号);
+  });
+}
+function 次へ(){
+  const 選択項目 = document.querySelector('input[name="過去に似た痛み"]:checked');
+  if(!選択項目) return;
+  localStorage.setItem("過去に似た痛み", 選択項目.value);
+  location.href = "step509.html";
+}
+画面初期化();
+</script>
+</body>
+</html>

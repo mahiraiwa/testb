@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>既往の痛みの有無</title>
+</head>
+
+<body>
+
+<h1>既往の痛みの有無</h1>
+
+<p id="発症時期表示"></p>
+
+<p>今回の痛みについてお聞きします</p>
+
+<p>痛みの強さは違っていても、以前に似たような痛みがありましたか</p>
+
+<p>それとも人生で初めての痛みですか</p>
+
+<form>
+
+<label>
+<input type="radio" name="過去に似た痛み" value="人生で初めての痛み" checked>
+人生で初めての痛み
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="過去に似た痛み" value="前にも似たような痛みがあった">
+前にも似たような痛みがあった
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="過去に似た痛み" value="わからない">
+わからない
+</label>
+
+<br><br>
+
+<button type="button" onclick="次へ()">
+次へ
+</button>
+
+</form>
+
+<script>
+
+const 痛み開始時期 =
+localStorage.getItem("痛み開始時期");
+
+if(痛み開始時期){
+
+document.getElementById("発症時期表示").textContent =
+"あなたは「" +
+痛み開始時期 +
+"」から痛みがあると回答しました。";
+
+}
+
+function 次へ(){
+
+const 選択項目 =
+document.querySelector(
+'input[name="過去に似た痛み"]:checked'
+);
+
+if(!選択項目){
+
+return;
+
+}
+
+localStorage.setItem(
+"過去に似た痛み",
+選択項目.value
+);
+
+location.href = "step9_b.html";
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>最もつらい症状</title>
+</head>
+
+<body>
+
+<h1>最もつらい症状</h1>
+
+<p>
+複数の症状があります。<br>
+この中で最もつらい症状を選んでください。
+</p>
+
+<form id="chiefForm">
+
+<div id="症状一覧"></div>
+
+<br>
+
+<button type="button" onclick="次へ()">
+次へ
+</button>
+
+</form>
+
+<script>
+
+/* Step2_dから取得 */
+
+const 主訴一覧 =
+JSON.parse(
+localStorage.getItem("主訴一覧")
+);
+
+/* 症状表示 */
+
+const 症状一覧 =
+document.getElementById("症状一覧");
+
+主訴一覧.forEach(function(症状){
+
+const label =
+document.createElement("label");
+
+label.innerHTML =
+'<input type="radio" name="最重要主訴" value="'
++ 症状 +
+'"> '
++ 症状;
+
+症状一覧.appendChild(label);
+
+症状一覧.appendChild(
+document.createElement("br")
+);
+
+});
+
+/* 保存して次へ */
+
+function 次へ(){
+
+const 選択 =
+document.querySelector(
+'input[name="最重要主訴"]:checked'
+);
+
+if(!選択){
+
+return;
+
+}
+
+localStorage.setItem(
+"最重要主訴",
+選択.value
+);
+
+if(選択.value === "痛み"){
+
+location.href = "step3_c.html";
+
+}
+else if(選択.value === "めまい"){
+
+location.href = "step4_2.html";
+
+}
+else{
+
+location.href = "step4_11.html";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

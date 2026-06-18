@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>最初の痛みの持続時間</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ラジオボタンの選択肢の間隔を均一に調整 */
+form label {
+    display: block;
+    margin-bottom: 15px; /* ここで選択肢同士の間隔を調整します */
+    margin-left: 1em;
+}
+
+/* 「次へ」ボタンの上の余白を確保 */
+form button {
+    margin-top: 25px; 
+    display: block;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="行60100"></h1>
+
+<h2 id="部位名表示"></h2>
+<p id="行60200" style="margin-left: 1em;"></p>
+<p id="行60300" style="margin-left: 1em;"></p>
+
+<form>
+
+<label>
+<input type="radio" name="持続時間" value="60400" checked>
+<span id="行60400"></span>
+</label>
+
+<label>
+<input type="radio" name="持続時間" value="60500">
+<span id="行60500"></span>
+</label>
+
+<label>
+<input type="radio" name="持続時間" value="60600">
+<span id="行60600"></span>
+</label>
+
+<label>
+<input type="radio" name="持続時間" value="60700">
+<span id="行60700"></span>
+</label>
+
+<label>
+<input type="radio" name="持続時間" value="60800">
+<span id="行60800"></span>
+</label>
+
+<label>
+<input type="radio" name="持続時間" value="60900">
+<span id="行60900"></span>
+</label>
+
+<label>
+<input type="radio" name="持続時間" value="61000">
+<span id="行61000"></span>
+</label>
+
+<button type="button" id="行61100" onclick="次へ()"></button>
+
+</form>
+
+<script src="dict.js"></script>
+
+<script>
+function 画面初期化(){
+  [60100, 60200, 60300, 60400, 60500, 60600, 60700, 60800, 60900, 61000, 61100].forEach(function(番号){
+    const 要素 = document.getElementById("行" + 番号);
+    if(要素) 要素.textContent = 文字列取得(番号);
+  });
+
+  // 部位名を表示
+  const 部位テキスト = localStorage.getItem("痛みの場所（確定）");
+  if(部位テキスト){
+    document.getElementById("部位名表示").textContent = 部位テキスト;
+  }
+}
+
+function 次へ(){
+  const 持続時間 = document.querySelector('input[name="持続時間"]:checked').value;
+  localStorage.setItem("最初の痛みの持続時間", 持続時間);
+  location.href = "step6_b.html";
+}
+
+画面初期化();
+</script>
+
+</body>
+</html>

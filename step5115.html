@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>身長・体重・体温</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<style>
+body {
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background-image: url("logob.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+}
+</style>
+
+<form>
+<p>　</p>
+<!-- 120050: 身長・体重・本日の体温を教えてください -->
+<p id="行120050" style="margin-left: 1em;"></p>
+<p>　</p>
+
+<!-- 身長 -->
+<!-- 120055: 身長（センチメートル） -->
+<p id="行120055" style="margin-left: 1em;"></p>
+<p>　</p>
+<select id="身長百" onchange="身長入力()">
+  <option value="0">0</option>
+  <option value="1">1</option>
+</select>
+<select id="身長十" onchange="身長入力()">
+  <option value="0">0</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+</select>
+<select id="身長一" onchange="身長入力()">
+  <option value="0">0</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+</select>
+&nbsp;cm
+<br><br>
+<label>
+<!-- 120056: 身長を測っていない／わからない -->
+<input type="radio" name="身長不明" id="身長不明" value="120056" onchange="身長不明切替()">
+<span id="行120056"></span>
+</label>
+<br><br>
+<hr>
+
+<!-- 体重 -->
+<!-- 120060: 体重（キログラム） -->
+<p id="行120060" style="margin-left: 1em;"></p>
+<p>　</p>
+<select id="体重百" onchange="体重入力()">
+  <option value="0">0</option>
+  <option value="1">1</option>
+</select>
+<select id="体重十" onchange="体重入力()">
+  <option value="0">0</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+</select>
+<select id="体重一" onchange="体重入力()">
+  <option value="0">0</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+</select>
+&nbsp;kg
+<br><br>
+<label>
+<!-- 120061: 体重を測っていない／わからない -->
+<input type="radio" name="体重不明" id="体重不明" value="120061" onchange="体重不明切替()">
+<span id="行120061"></span>
+</label>
+<br><br>
+<hr>
+
+<!-- 体温 -->
+<!-- 120065: 本日の体温（摂氏） -->
+<p id="行120065" style="margin-left: 1em;"></p>
+<p>　</p>
+<select id="体温整数">
+  <option value="35">35</option>
+  <option value="36">36</option>
+  <option value="37" selected>37</option>
+  <option value="38">38</option>
+  <option value="39">39</option>
+  <option value="40">40</option>
+  <option value="41">41</option>
+</select>
+.
+<select id="体温小数">
+  <option value="0">0</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+</select>
+&nbsp;°C
+<br><br>
+<hr>
+
+<!-- 122300: 過去6か月以内に、日本以外の国に行ったまたは滞在したことがありますか？ -->
+<p id="行122300" style="margin-left: 1em;"></p>
+<p>　</p>
+<label>
+<!-- 122400: はい -->
+<input type="radio" name="海外渡航歴" value="122400">
+<span id="行122400"></span>
+</label>
+<br><br>
+<label>
+<!-- 122500: いいえ -->
+<input type="radio" name="海外渡航歴" value="122500" checked>
+<span id="行122500"></span>
+</label>
+<br><br>
+
+<!-- 122200: 終了 -->
+<button type="button" id="行122200" onclick="終了()"></button>
+</form>
+<script src="dict.js"></script>
+<script>
+function 画面初期化(){
+  [120050, 120055, 120056,
+   120060, 120061,
+   120065,
+   122300, 122400, 122500,
+   122200].forEach(function(番号){
+    const 要素 = document.getElementById("行" + 番号);
+    if(要素) 要素.textContent = 文字列取得(番号);
+  });
+}
+
+function 身長不明切替(){
+  const 不明 = document.getElementById("身長不明").checked;
+  ["身長百", "身長十", "身長一"].forEach(function(id){
+    document.getElementById(id).disabled = 不明;
+  });
+}
+
+function 身長入力(){
+  document.getElementById("身長不明").checked = false;
+  ["身長百", "身長十", "身長一"].forEach(function(id){
+    document.getElementById(id).disabled = false;
+  });
+}
+
+function 体重不明切替(){
+  const 不明 = document.getElementById("体重不明").checked;
+  ["体重百", "体重十", "体重一"].forEach(function(id){
+    document.getElementById(id).disabled = 不明;
+  });
+}
+
+function 体重入力(){
+  document.getElementById("体重不明").checked = false;
+  ["体重百", "体重十", "体重一"].forEach(function(id){
+    document.getElementById(id).disabled = false;
+  });
+}
+
+function 終了(){
+  // 身長
+  if(document.getElementById("身長不明").checked){
+    localStorage.setItem("身長", "不明");
+  } else {
+    const 身長 = document.getElementById("身長百").value
+                + document.getElementById("身長十").value
+                + document.getElementById("身長一").value;
+    localStorage.setItem("身長", 身長);
+  }
+
+  // 体重
+  if(document.getElementById("体重不明").checked){
+    localStorage.setItem("体重", "不明");
+  } else {
+    const 体重 = document.getElementById("体重百").value
+                + document.getElementById("体重十").value
+                + document.getElementById("体重一").value;
+    localStorage.setItem("体重", 体重);
+  }
+
+  // 体温
+  const 体温 = document.getElementById("体温整数").value
+              + "."
+              + document.getElementById("体温小数").value;
+  localStorage.setItem("体温", 体温);
+
+  // 海外渡航歴
+  localStorage.setItem("海外渡航歴", document.querySelector('input[name="海外渡航歴"]:checked').value);
+
+  location.href = "step601b.html";
+}
+画面初期化();
+</script>
+</body>
+</html>

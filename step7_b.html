@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>痛みと姿勢・動作</title>
+</head>
+
+<body>
+
+<h1>痛みと姿勢・動作</h1>
+
+<p>痛みがひどくなる姿勢や動作はありますか</p>
+
+<label>
+<input type="radio" name="悪化する姿勢や動作" value="はい" checked>
+はい
+</label>
+<br>
+
+<label>
+<input type="radio" name="悪化する姿勢や動作" value="いいえ">
+いいえ
+</label>
+<br>
+
+<label>
+<input type="radio" name="悪化する姿勢や動作" value="わからない">
+わからない
+</label>
+
+<br><br>
+
+<p>逆に、痛みが楽になる姿勢や動作はありますか</p>
+
+<label>
+<input type="radio" name="楽になる姿勢や動作" value="はい" checked>
+はい
+</label>
+<br>
+
+<label>
+<input type="radio" name="楽になる姿勢や動作" value="いいえ">
+いいえ
+</label>
+<br>
+
+<label>
+<input type="radio" name="楽になる姿勢や動作" value="わからない">
+わからない
+</label>
+
+<br><br>
+
+<p>「はい」を選んだ場合は、あとで医師に詳しく伝えてください。</p>
+
+<br>
+
+<button type="button" onclick="次へ()">
+次へ
+</button>
+
+<script>
+
+function 次へ() {
+
+const 悪化する姿勢や動作 =
+document.querySelector(
+'input[name="悪化する姿勢や動作"]:checked'
+);
+
+const 楽になる姿勢や動作 =
+document.querySelector(
+'input[name="楽になる姿勢や動作"]:checked'
+);
+
+if (
+!悪化する姿勢や動作 ||
+!楽になる姿勢や動作
+) {
+
+return;
+
+}
+
+localStorage.setItem(
+"悪化する姿勢や動作",
+悪化する姿勢や動作.value
+);
+
+localStorage.setItem(
+"楽になる姿勢や動作",
+楽になる姿勢や動作.value
+);
+
+location.href = "step8_b.html";
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>最初のめまいの持続時間</title>
+</head>
+
+<body>
+
+<h1>最初のめまいの持続時間</h1>
+
+<p>最初にめまいを感じた時の話を聞かせてください</p>
+
+<p>その時のめまいはどのくらい続きましたか</p>
+
+<form>
+
+<label>
+<input type="radio" name="最初のめまいの持続時間" value="1分以内" checked>
+1分以内
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="最初のめまいの持続時間" value="10分以内">
+10分以内
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="最初のめまいの持続時間" value="1時間以内">
+1時間以内
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="最初のめまいの持続時間" value="24時間以内">
+24時間以内
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="最初のめまいの持続時間" value="1週間以内">
+1週間以内
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="最初のめまいの持続時間" value="1週間以上">
+1週間以上
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="最初のめまいの持続時間" value="わからない">
+わからない
+</label>
+
+<br><br>
+
+<button type="button" onclick="次へ()">
+次へ
+</button>
+
+</form>
+
+<script>
+
+function 次へ(){
+
+const 最初のめまいの持続時間 =
+document.querySelector(
+'input[name="最初のめまいの持続時間"]:checked'
+).value;
+
+localStorage.setItem(
+"最初のめまいの持続時間",
+最初のめまいの持続時間
+);
+
+location.href = "step9_b.html";
+
+}
+
+</script>
+
+</body>
+</html>

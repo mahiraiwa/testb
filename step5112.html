@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>その他の健康情報</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<style>
+body {
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background-image: url("logob.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+}
+</style>
+<!-- 120100: その他の健康情報 -->
+<h1 id="行120100"></h1>
+
+<!--
+*** 排尿セクション：step510bに移動のためコメント化 ***
+<p id="行120200" style="margin-left: 1em;"></p>
+<form>
+<p>　</p>
+<label>
+<input type="radio" name="排尿しにくい" value="120300">
+<span id="行120300"></span>
+</label>
+<br><br>
+<label>
+<input type="radio" name="排尿しにくい" value="120400" checked>
+<span id="行120400"></span>
+</label>
+<br><br>
+<hr>
+<p id="行120500" style="margin-left: 1em;"></p>
+<p>　</p>
+<label>
+<input type="radio" name="排尿時痛" value="120600">
+<span id="行120600"></span>
+</label>
+<br><br>
+<label>
+<input type="radio" name="排尿時痛" value="120700" checked>
+<span id="行120700"></span>
+</label>
+<br><br>
+<hr>
+*** 排尿セクションここまで ***
+-->
+
+<form>
+<p>　</p>
+<!-- 120800: 最近、自分のいるところがどこなのかわからなくなったことはありますか -->
+<p id="行120800" style="margin-left: 1em;"></p>
+<p>　</p>
+<label>
+<!-- 120900: わからなくなったことがある -->
+<input type="radio" name="場所がわからなくなった" value="120900">
+<span id="行120900"></span>
+</label>
+<br><br>
+<label>
+<!-- 121000: わからなくなったことはない -->
+<input type="radio" name="場所がわからなくなった" value="121000" checked>
+<span id="行121000"></span>
+</label>
+<br><br>
+<hr>
+<!-- 121100: 最近、気を失ったことはありますか -->
+<p id="行121100" style="margin-left: 1em;"></p>
+<p>　</p>
+<label>
+<!-- 121200: 気を失ったことがある -->
+<input type="radio" name="失神" value="121200">
+<span id="行121200"></span>
+</label>
+<br><br>
+<label>
+<!-- 121300: 気を失ったことはない -->
+<input type="radio" name="失神" value="121300" checked>
+<span id="行121300"></span>
+</label>
+<br><br>
+<hr>
+<!-- 121400: 二年以内に健康診断を受けたことはありますか -->
+<p id="行121400" style="margin-left: 1em;"></p>
+<p>　</p>
+<label>
+<!-- 121500: 二年以内に健診を受けている -->
+<input type="radio" name="健康診断受診" value="121500">
+<span id="行121500"></span>
+</label>
+<br><br>
+<label>
+<!-- 121600: 二年以内には健診を受けていない -->
+<input type="radio" name="健康診断受診" value="121600" checked>
+<span id="行121600"></span>
+</label>
+<br><br>
+<!-- 121700: ある場合は、その内容を後で医師が確認します。 -->
+<p id="行121700"></p>
+<br>
+<hr>
+<!-- 121800: 今までの人生で、大きな病気、あるいは、入院、あるいは、手術を受けたことはありますか -->
+<p id="行121800" style="margin-left: 1em;"></p>
+<p>　</p>
+<label>
+<!-- 121900: はい -->
+<input type="radio" name="大きな病気の既往" value="121900">
+<span id="行121900"></span>
+</label>
+<br><br>
+<label>
+<!-- 122000: いいえ -->
+<input type="radio" name="大きな病気の既往" value="122000" checked>
+<span id="行122000"></span>
+</label>
+<br><br>
+<!-- 122100: ある場合は、その内容を後で医師が確認します。 -->
+<p id="行122100"></p>
+<br>
+<!-- 110900: 次へ -->
+<button type="button" id="行110900" onclick="次へ()"></button>
+</form>
+<script src="dict.js"></script>
+<script>
+function 画面初期化(){
+  [120100,
+   120800, 120900, 121000,
+   121100, 121200, 121300,
+   121400, 121500, 121600, 121700,
+   121800, 121900, 122000, 122100,
+   110900].forEach(function(番号){
+    const 要素 = document.getElementById("行" + 番号);
+    if(要素) 要素.textContent = 文字列取得(番号);
+  });
+}
+function 次へ(){
+  localStorage.setItem("場所がわからなくなった", document.querySelector('input[name="場所がわからなくなった"]:checked').value);
+  localStorage.setItem("失神", document.querySelector('input[name="失神"]:checked').value);
+  localStorage.setItem("健康診断受診", document.querySelector('input[name="健康診断受診"]:checked').value);
+  localStorage.setItem("大きな病気の既往", document.querySelector('input[name="大きな病気の既往"]:checked').value);
+  location.href = "step5115.html";
+}
+画面初期化();
+</script>
+</body>
+</html>

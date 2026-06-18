@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>最初のめまいの持続時間</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 160100: 最初のめまいの持続時間 -->
+<h1 id="行160100"></h1>
+
+<!-- 160200: 最初にめまいを感じた時の話を聞かせてください -->
+<p id="行160200" style="margin-left: 1em;"></p>
+<!-- 160300: その時のめまいはどのくらい続きましたか -->
+<p id="行160300" style="margin-left: 1em;"></p>
+
+<p>　</p>
+
+<form>
+
+<label>
+<!-- 160400: 1分以内 -->
+<input type="radio" name="最初のめまいの持続時間" value="160400" checked>
+<span id="行160400"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 160500: 10分以内 -->
+<input type="radio" name="最初のめまいの持続時間" value="160500">
+<span id="行160500"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 160600: 1時間以内 -->
+<input type="radio" name="最初のめまいの持続時間" value="160600">
+<span id="行160600"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 160700: 24時間以内 -->
+<input type="radio" name="最初のめまいの持続時間" value="160700">
+<span id="行160700"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 160800: 1週間以内 -->
+<input type="radio" name="最初のめまいの持続時間" value="160800">
+<span id="行160800"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 160900: 1週間以上 -->
+<input type="radio" name="最初のめまいの持続時間" value="160900">
+<span id="行160900"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 161000: わからない -->
+<input type="radio" name="最初のめまいの持続時間" value="161000">
+<span id="行161000"></span>
+</label>
+
+<br><br>
+
+<!-- 161100: 次へ -->
+<button type="button" id="行161100" onclick="次へ()"></button>
+
+</form>
+
+<script src="dict.js"></script>
+
+<script>
+function 画面初期化(){
+  [160100, 160200, 160300, 160400, 160500, 160600, 160700, 160800, 160900, 161000, 161100].forEach(function(番号){
+    const 要素 = document.getElementById("行" + 番号);
+    if(要素) 要素.textContent = 文字列取得(番号);
+  });
+}
+
+function 次へ(){
+  const 持続時間 = document.querySelector('input[name="最初のめまいの持続時間"]:checked').value;
+  localStorage.setItem("最初のめまいの持続時間", 持続時間);
+  location.href = "step509.html";
+}
+
+画面初期化();
+</script>
+
+</body>
+</html>

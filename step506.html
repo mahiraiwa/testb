@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>痛みの変化</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 70100: 痛みの変化 -->
+<h1 id="行70100"></h1>
+
+<!-- 70200: 最初に痛みを感じてから今日までの経過を教えてください -->
+<p id="行70200" style="margin-left: 1em;"></p>
+<!-- 70300: 痛みはどのように変化しましたか -->
+<p id="行70300" style="margin-left: 1em;"></p>
+
+<p>　</p>
+
+<form>
+
+<label>
+<!-- 70400: ずっと同じように痛い -->
+<input type="radio" name="痛みの変化" value="70400" checked>
+<span id="行70400"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 70500: だんだん強くなっている -->
+<input type="radio" name="痛みの変化" value="70500">
+<span id="行70500"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 70600: だんだん弱くなっている -->
+<input type="radio" name="痛みの変化" value="70600">
+<span id="行70600"></span>
+</label>
+
+<br><br>
+
+<label>
+<!-- 70700: 波のように強くなったり弱くなったりしている -->
+<input type="radio" name="痛みの変化" value="70700">
+<span id="行70700"></span>
+</label>
+
+<br><br>
+
+<!-- 70800: 次へ -->
+<button type="button" id="行70800" onclick="次へ()"></button>
+
+</form>
+
+<script src="dict.js"></script>
+
+<script>
+function 画面初期化(){
+  [70100, 70200, 70300, 70400, 70500, 70600, 70700, 70800].forEach(function(番号){
+    const 要素 = document.getElementById("行" + 番号);
+    if(要素) 要素.textContent = 文字列取得(番号);
+  });
+}
+
+function 次へ(){
+  const 痛みの変化 = document.querySelector('input[name="痛みの変化"]:checked').value;
+  localStorage.setItem("痛みの変化", 痛みの変化);
+  location.href = "step507.html";
+}
+
+画面初期化();
+</script>
+
+</body>
+</html>

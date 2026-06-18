@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>最初の痛みの持続時間</title>
+</head>
+
+<body>
+
+<h1>最初の痛みの持続時間</h1>
+
+<p id="表示文"></p>
+
+<form>
+
+<label>
+<input type="radio" name="持続時間" value="1分間以内" checked>
+1分間以内
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="持続時間" value="10分間以内">
+10分間以内
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="持続時間" value="1時間以内">
+1時間以内
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="持続時間" value="24時間以内">
+24時間以内
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="持続時間" value="1週間以内">
+1週間以内
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="持続時間" value="1週間以上（今も続いている）">
+1週間以上（今も続いている）
+</label>
+
+<br><br>
+
+<button type="button" onclick="次へ()">
+次へ
+</button>
+
+</form>
+
+<script>
+
+//
+// 痛みの場所取得（日本語キーのみ）
+//
+
+const 痛みの場所 =
+localStorage.getItem("痛みの場所（確定）");
+
+if (!痛みの場所) {
+    location.href = "step4.html";
+}
+
+//
+// 表示文生成
+//
+
+document.getElementById("表示文").textContent =
+痛みの場所 + "の痛みの、最初に続いた持続時間";
+
+//
+// 保存
+//
+
+function 次へ() {
+
+const 持続時間 =
+document.querySelector('input[name="持続時間"]:checked').value;
+
+localStorage.setItem("最初の痛みの持続時間", 持続時間);
+
+location.href = "step6_b.html";
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>便通と睡眠</title>
+</head>
+
+<body>
+
+<h1>便通と睡眠</h1>
+
+<p id="発症時期表示"></p>
+
+<form>
+
+<p>便通（大便の出かた）に変化はありますか</p>
+
+<label>
+<input type="radio" name="便通の変化" value="ある" checked>
+ある
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="便通の変化" value="ない">
+ない
+</label>
+
+<br><br>
+
+<hr>
+
+<p>睡眠に変化はありますか</p>
+
+<label>
+<input type="radio" name="睡眠の変化" value="ある" checked>
+ある
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="睡眠の変化" value="ない">
+ない
+</label>
+
+<br><br>
+
+<p>詳しい内容は、あとで医師が確認します。</p>
+
+<br>
+
+<button type="button" onclick="次へ()">
+次へ
+</button>
+
+</form>
+
+<script>
+
+const 痛み開始時期 =
+localStorage.getItem("痛み開始時期");
+
+if(痛み開始時期){
+
+document.getElementById("発症時期表示").textContent =
+"あなたは「" +
+痛み開始時期 +
+"」から痛みがあると回答しました。";
+
+}
+
+function 次へ(){
+
+const 便通の変化 =
+document.querySelector(
+'input[name="便通の変化"]:checked'
+);
+
+const 睡眠の変化 =
+document.querySelector(
+'input[name="睡眠の変化"]:checked'
+);
+
+if(
+!便通の変化 ||
+!睡眠の変化
+){
+
+return;
+
+}
+
+localStorage.setItem(
+"便通の変化",
+便通の変化.value
+);
+
+localStorage.setItem(
+"睡眠の変化",
+睡眠の変化.value
+);
+
+location.href = "step11_b.html";
+
+}
+
+</script>
+
+</body>
+</html>

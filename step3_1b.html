@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>最も痛い部位</title>
+</head>
+
+<body>
+
+<h1>最も痛い部位</h1>
+
+<p>
+複数の部位に痛みがあります。<br>
+この中で最も痛い部位を選んでください。
+</p>
+
+<form id="painForm">
+
+<div id="部位一覧"></div>
+
+<br>
+
+<button type="button" onclick="次へ()">
+次へ
+</button>
+
+</form>
+
+<script>
+
+/* Step3から取得 */
+
+const 痛み部位 =
+JSON.parse(
+localStorage.getItem("痛み部位")
+);
+
+
+
+/* 部位表示 */
+
+const 部位一覧 =
+document.getElementById("部位一覧");
+
+痛み部位.forEach(function(部位){
+
+const label =
+document.createElement("label");
+
+label.innerHTML =
+'<input type="radio" name="最重要痛み部位" value="'
++ 部位 +
+'"> '
++ 部位;
+
+部位一覧.appendChild(label);
+
+部位一覧.appendChild(
+document.createElement("br")
+);
+
+});
+
+/* 保存して次へ */
+
+function 次へ(){
+
+const 選択 =
+document.querySelector(
+'input[name="最重要痛み部位"]:checked'
+);
+
+if(!選択){
+
+return;
+
+}
+
+localStorage.setItem(
+"最重要痛み部位",
+選択.value
+);
+
+location.href = "step4_b.html";
+
+}
+
+</script>
+
+</body>
+</html>

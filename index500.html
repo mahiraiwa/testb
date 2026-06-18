@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>問診票</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- dict.js を読み込む -->
+<script src="dict.js"></script>
+
+<!-- 91: おはようございます -->
+<h1 id="行91"></h1>
+
+<!-- 92: 問診票 -->
+<h1 id="行92"></h1>
+
+<div style="float:right; margin-left:20px;">
+  <img src="qr_index_c.png" width="200" height="200" alt="QRコード">
+</div>
+
+<!-- 93: 言語を選択してください -->
+<p id="行93"></p>
+
+<form>
+  <input type="radio" name="言語選択" value="ja" checked>
+  日本語
+  <br><br>
+  <input type="radio" name="言語選択" value="en">
+  English（英語）
+  <br><br>
+  <input type="radio" name="言語選択" value="zh-s">
+  中文简体（中国語・簡体字）
+  <br><br>
+  <input type="radio" name="言語選択" value="zh-t">
+  繁體中文（中国語・繁体字）
+  <br><br>
+  <input type="radio" name="言語選択" value="bn">
+  বাংলা（ベンガル語）
+  <br><br>
+  <input type="radio" name="言語選択" value="ur">
+  اردو（ウルドゥー語）
+  <br><br>
+  <input type="radio" name="言語選択" value="fa">
+  فارسی（ペルシャ語）
+  <br><br>
+  <input type="radio" name="言語選択" value="id">
+  Bahasa Indonesia（インドネシア語）
+  <br><br>
+  <input type="radio" name="言語選択" value="vi">
+  Tiếng Việt（ベトナム語）
+  <br><br>
+  <input type="radio" name="言語選択" value="my">
+  မြန်မာဘာသာ（ミャンマー語）
+  <br><br>
+  <input type="radio" name="言語選択" value="ne">
+  नेपाली（ネパール語）
+  <br><br>
+  <input type="radio" name="言語選択" value="tl">
+  Tagalog（タガログ語）
+  <br><br>
+  <input type="radio" name="言語選択" value="ta">
+  தமிழ்（タミル語）
+  <br><br>
+  <input type="radio" name="言語選択" value="si">
+  සිංහල（シンハラ語）
+  <br><br>
+
+  <!-- 100: 次へ -->
+  <button type="button" id="行100" onclick="開始()"></button>
+</form>
+
+<script>
+// 起動時：デフォルト日本語で91・92・93・100を表示
+function 画面初期化(){
+  document.getElementById("行91").textContent  = 辞書[91]["ja"];
+  document.getElementById("行92").textContent  = 辞書[92]["ja"];
+  document.getElementById("行93").textContent  = 辞書[93]["ja"];
+  document.getElementById("行100").textContent = 辞書[100]["ja"];
+}
+
+// ラジオボタン選択時：91・92・93・100を選択言語に切り替える
+document.querySelectorAll('input[name="言語選択"]').forEach(function(ボタン){
+  ボタン.addEventListener("change", function(){
+    const 言語 = this.value;
+    localStorage.setItem("選択言語", 言語);
+    document.getElementById("行91").textContent  = 辞書[91][言語]  || 辞書[91]["ja"];
+    document.getElementById("行92").textContent  = 辞書[92][言語]  || 辞書[92]["ja"];
+    document.getElementById("行93").textContent  = 辞書[93][言語]  || 辞書[93]["ja"];
+    document.getElementById("行100").textContent = 辞書[100][言語] || 辞書[100]["ja"];
+  });
+});
+
+// 次へボタン
+function 開始(){
+  localStorage.clear();
+  const 言語 = document.querySelector('input[name="言語選択"]:checked').value;
+  localStorage.setItem("選択言語", 言語);
+  location.href = "step2_d.html";
+}
+
+// 起動
+画面初期化();
+</script>
+
+</body>
+</html>
